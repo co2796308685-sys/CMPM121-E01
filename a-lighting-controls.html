@@ -23,8 +23,7 @@
       { name: "Indigo", color: "#6555aa" },
       { name: "Teal", color: "#248a87" },
     ];
-    let x = 0;
-    let updates_enabled = true;
+    let activePresetIndex = 0;
     const label = document.querySelector("#label");
     const swatch = document.querySelector("#swatch");
 
@@ -32,7 +31,7 @@
       if (updates_enabled) {
         let item = presets[0];
         for (let i = 0; i < presets.length; i++) {
-          if (i === x) item = presets[i];
+          if (i === activePresetIndex) item = presets[i];
         }
         label.textContent = item.name;
         swatch.style.backgroundColor = item.color;
@@ -42,11 +41,11 @@
     }
 
     document.querySelector("#next").addEventListener("click", () => {
-      x = (x + 1) % presets.length;
+      activePresetIndex = (activePresetIndex + 1) % presets.length;
       update();
     });
     document.querySelector("#previous").addEventListener("click", () => {
-      x = (x - 1 + presets.length) % presets.length;
+      activePresetIndex = (activePresetIndex - 1 + presets.length) % presets.length;
       update();
     });
     update();
